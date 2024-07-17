@@ -23,6 +23,12 @@ export default function Quiz() {
     <input className='rad' type="radio" name="answer" id="option3" />
     <label htmlFor="option3" id='val3'>window.alert()</label>
 </div>
+<div className="btns">
+    <button className='btn1'>Prev</button>
+    <button className='btn2'>Next</button>
+</div>
+
+
     </div>
 </section>
 

@@ -18,7 +18,7 @@ body{
 .box{
     width: 550px;
     padding: 20px;
-    border: 1px solid green;
+    border: 1px solid #51cc51;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -32,7 +32,7 @@ body{
     font-size: 2rem;
     font-weight: bolder;
     padding: 5px;
-    border: 3px solid green;
+    border: 3px solid #51cc51;
 }
 .instruction{
     width: 100%;
@@ -89,7 +89,7 @@ padding: 5px;
 .box{
     width: 550px;
     padding: 20px;
-    border: 1px solid green;
+    border: 1px solid #51cc51;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -103,7 +103,7 @@ padding: 5px;
     font-size: 2rem;
     font-weight: bolder;
     padding: 5px;
-    border: 3px solid green;
+    border: 3px solid #51cc51;
 }
 .que{
     width: 100%;
@@ -140,7 +140,7 @@ padding: 5px;
     display: block;
     width: 12px;
     height: 12px;
-    background-color: green;
+    background-color: #51cc51;
     border-radius: 50%;
    
     position: absolute;
@@ -150,10 +150,36 @@ padding: 5px;
 }
 
 .opt > input[type="radio"]:focus {
-    background-color: green;
-    border: green;
+    background-color: #51cc51;
+    border: #51cc51;
     outline: none;
 }
+.btns{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.btns > .btn1{
+padding: 6px 15px;
+text-align: center;
+font-size: 1rem;
+border: none;
+background-color: yellow;
+color: black;
+cursor: pointer;
+
+}
+.btns > .btn2{
+    padding: 6px 15px;
+    text-align: center;
+    font-size: 1rem;
+    border: none;
+    background-color: #51cc51;
+    color: black;
+    cursor: pointer;
+    
+    }
 @media (max-width:450px){
     .hero{
         padding: 20px;
