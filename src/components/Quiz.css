@@ -12,6 +12,7 @@ body{
     align-items: center;
     justify-content: center;
     padding: 40px 80px;
+    display: none;
 
 }
 .box{
@@ -78,7 +79,40 @@ padding: 5px;
     color: black;
     font-size: 1rem;
 }
-
+.QuizSec{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 80px;
+}
+.box{
+    width: 550px;
+    padding: 20px;
+    border: 1px solid green;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+.header{
+    width: 100%;
+    text-align: center;
+    color: white;
+    font-size: 2rem;
+    font-weight: bolder;
+    padding: 5px;
+    border: 3px solid green;
+}
+.que{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+    font-weight: bolder;
+    color: white;
+}
 @media (max-width:450px){
     .hero{
         padding: 20px;

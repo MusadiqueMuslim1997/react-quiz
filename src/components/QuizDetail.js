@@ -13,7 +13,7 @@ export default function QuizDetail() {
     <li>2. You points are awarded for the correct answer.</li>
     <li>3. Each question has four option. You can choose only one option.</li>
     <li>4. You can review and change answers before the quiz finish.</li>
-    <li>5. The result wuill be declared at the end of the quiz.</li>
+    <li>5. The result will be declared at the end of the quiz.</li>
 </ul>
 </div>
 
