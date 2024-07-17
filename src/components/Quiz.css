@@ -113,6 +113,47 @@ padding: 5px;
     font-weight: bolder;
     color: white;
 }
+.opt{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    color:silver;
+    gap: 10px;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+.opt > input[type="radio"] {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid white;
+    
+    border-radius: 50%;
+    position: relative;
+    cursor: pointer;
+}
+
+.opt > input[type="radio"]:checked::before {
+    content: '';
+    display: block;
+    width: 12px;
+    height: 12px;
+    background-color: green;
+    border-radius: 50%;
+   
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.opt > input[type="radio"]:focus {
+    background-color: green;
+    border: green;
+    outline: none;
+}
 @media (max-width:450px){
     .hero{
         padding: 20px;
