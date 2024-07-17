@@ -78,3 +78,23 @@ body{
     color: black;
     font-size: 1rem;
 }
+
+@media (max-width:450px){
+    .hero{
+        padding: 20px;
+    }
+    .box{
+        width: 300px;
+        gap: 20px;
+    }
+    .header{
+        font-size: 1.2rem;
+    }
+    .instruction > ul > li{
+        font-size: 0.8rem;
+    }
+    .inp-user > input{
+        width: 250px;
+        font-size: 0.8rem;
+    }
+}
