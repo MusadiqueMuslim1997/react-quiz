@@ -85,6 +85,7 @@ padding: 5px;
     align-items: center;
     justify-content: center;
     padding: 40px 80px;
+    display: none;
 }
 .box{
     width: 550px;
@@ -179,13 +180,65 @@ cursor: pointer;
     background-color: #51cc51;
     color: black;
     cursor: pointer;
-    
     }
+    .main{
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 40px 80px;
+        
+    }
+    .boxes{
+        width: 550px;
+        padding: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 30px;
+    }
+    .header{
+        width: 100%;
+        text-align: center;
+        color: white;
+        font-size: 2rem;
+        font-weight: bolder;
+        padding: 5px;
+        border: 3px solid #51cc51;
+    }
+.info{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    border: 1px solid silver;
+    padding: 20px;
+}
+.tit{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.name{
+    color: silver;
+    font-size: 1rem;
+}
+.val{
+    color: silver;
+    font-size: 1rem;
+}
+.green{
+    color: #51cc51;
+}
 @media (max-width:500px){
-    .hero, .QuizSec{
+    .hero, .QuizSec, .main{
         padding: 20px;
     }
-    .box{
+    .box,.boxes{
         width: 300px;
         gap: 20px;
     }
@@ -206,6 +259,12 @@ cursor: pointer;
     }
     .inp-user > input{
         width: 250px;
+        font-size: 0.8rem;
+    }
+    .name{
+        font-size: 0.8rem;
+    }
+    .val{
         font-size: 0.8rem;
     }
 }
