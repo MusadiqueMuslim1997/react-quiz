@@ -180,8 +180,8 @@ cursor: pointer;
     cursor: pointer;
     
     }
-@media (max-width:450px){
-    .hero{
+@media (max-width:500px){
+    .hero, .QuizSec{
         padding: 20px;
     }
     .box{
@@ -190,6 +190,12 @@ cursor: pointer;
     }
     .header{
         font-size: 1.2rem;
+    }
+    .que{
+        font-size: 0.8rem;
+    }
+    .opt{
+        font-size: 0.7rem;
     }
     .instruction > ul > li{
         font-size: 0.8rem;
