@@ -45,7 +45,7 @@ body{
 .instruction > ul > li{
     color: silver;
     font-size: 1rem;
-    
+padding: 5px;    
 }
 .inp-user{
     width: 100%;
@@ -92,6 +92,9 @@ body{
     }
     .instruction > ul > li{
         font-size: 0.8rem;
+        
+
+       
     }
     .inp-user > input{
         width: 250px;
