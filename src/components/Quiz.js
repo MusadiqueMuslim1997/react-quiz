@@ -15,6 +15,15 @@ setQuestion(htmlQuiz[index])
 }    
 }
 
+let prev = () =>{
+    if(index > 0){
+    
+    
+    setIndex(--index)
+    setQuestion(htmlQuiz[index])
+    }    
+    }
+
   return (
    <>
 
@@ -44,7 +53,7 @@ setQuestion(htmlQuiz[index])
     <label htmlFor="option3" id='val3'>{question.opt4}</label>
 </div>
 <div className="btns">
-    <button className='btn1'>Prev</button>
+    <button className='btn1' onClick={prev}>Prev</button>
     <button className='btn2' onClick={next}>Next</button>
 </div>
 
