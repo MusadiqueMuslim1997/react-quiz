@@ -7,9 +7,12 @@ let [index,setIndex] = useState(0);
 let [question,setQuestion]= useState(htmlQuiz[index])
   
 let next = () =>{
+if(index < htmlQuiz.length-1){
 
 
-    
+setIndex(++index)
+setQuestion(htmlQuiz[index])
+}    
 }
 
   return (
