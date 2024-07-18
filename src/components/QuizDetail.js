@@ -37,7 +37,7 @@ export default function QuizDetail() {
 </div>
 
  </section>
- <section className='QuizSec' id='quizSec'>
+ {/* <section className='QuizSec' id='quizSec'>
     <div className="box">
         
 <div className="header">Quiz Application</div>
@@ -96,7 +96,7 @@ export default function QuizDetail() {
 </div>
 
 
-</section>
+</section> */}
 
 
 </>
