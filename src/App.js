@@ -1,18 +1,26 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
-import QuizDetail from './components/QuizDetail';
 import Quiz from './components/Quiz';
 import Result from './components/Result';
 
 function App() {
+  const [showQuiz, setShowQuiz] = useState(true);
+  const [score, setScore] = useState(0);
+  const [totalQuestions, setTotalQuestions] = useState(0);
+
+  const handleFinish = (quizScore, totalQuestions) => {
+    setScore(quizScore);
+    setTotalQuestions(totalQuestions);
+    setShowQuiz(false);
+  };
 
   return (
     <>
-    <QuizDetail/>
-    <Quiz/>
-    <Result/>
-   
- 
+      {showQuiz ? (
+        <Quiz onFinish={handleFinish} />
+      ) : (
+        <Result score={score} totalQuestions={totalQuestions} />
+      )}
     </>
   );
 }
