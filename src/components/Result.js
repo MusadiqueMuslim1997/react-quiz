@@ -3,9 +3,16 @@ import './Quiz.css';
 
 export default function Result({ username, score = 0, totalQuestions = 0 }) {
   const pointsPerQuestion = 10;
+
+  // Ensure the score does not exceed the total number of questions
+  const validScore = Math.min(score, totalQuestions);
+
+  // Calculate total possible points and earned points
   const totalPoints = totalQuestions * pointsPerQuestion;
-  const earnedPoints = score * pointsPerQuestion;
-  const percentage = totalQuestions > 0 ? Math.floor((score / totalQuestions) * 100) : 0; // Using Math.floor
+  const earnedPoints = validScore * pointsPerQuestion;
+
+  // Calculate percentage and ensure it's between 0 and 100
+  const percentage = totalQuestions > 0 ? Math.floor((validScore / totalQuestions) * 100) : 0;
   const result = percentage >= 50 ? 'Passed' : 'Failed';
 
   return (
@@ -27,7 +34,7 @@ export default function Result({ username, score = 0, totalQuestions = 0 }) {
           </div>
           <div className="tit">
             <div className="name">Correct Answers</div>
-            <div className="val">{score}</div>
+            <div className="val">{validScore}</div>
           </div>
           <div className="tit">
             <div className="name">Total Earned Points</div>
@@ -35,11 +42,11 @@ export default function Result({ username, score = 0, totalQuestions = 0 }) {
           </div>
           <div className="tit">
             <div className="name">Percentage</div>
-            <div className="val">{percentage}%</div> {/* Displaying percentage with Math.floor */}
+            <div className="val">{percentage}%</div>
           </div>
           <div className="tit">
             <div className="name">Quiz Result</div>
-            <div className={`val ${result === 'Passed' ? 'green' : 'red'}`}>{result}</div> {/* Conditional styling */}
+            <div className={`val ${result === 'Passed' ? 'green' : 'red'}`}>{result}</div>
           </div>
         </div>
       </div>

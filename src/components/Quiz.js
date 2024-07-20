@@ -11,9 +11,16 @@ export default function Quiz({ onFinish }) {
   const [showScore, setShowScore] = useState(false);
 
   const handleFinish = useCallback(() => {
+    // Check if all questions up to the current index are answered
+    for (let i = 0; i < htmlQuiz.length; i++) {
+      if (selectedAnswers[i] === null) {
+        alert('Please answer all previous questions before finishing the quiz.');
+        return; // Prevent navigating to results if validation fails
+      }
+    }
     setShowScore(true);
     onFinish(score, htmlQuiz.length); // Pass score and total questions to parent
-  }, [onFinish, score]);
+  }, [onFinish, score, selectedAnswers]);
 
   useEffect(() => {
     if (timeLeft > 0) {
