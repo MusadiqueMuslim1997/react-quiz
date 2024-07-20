@@ -2,17 +2,17 @@ import React from 'react';
 import './Quiz.css';
 
 export default function Result({ username, score = 0, totalQuestions = 0 }) {
+  // Ensure score and totalQuestions are valid
+  if (score > totalQuestions) {
+    console.warn('Score exceeds total number of questions.');
+  }
+
   const pointsPerQuestion = 10;
-
-  // Ensure the score does not exceed the total number of questions
-  const validScore = Math.min(score, totalQuestions);
-
-  // Calculate total possible points and earned points
   const totalPoints = totalQuestions * pointsPerQuestion;
-  const earnedPoints = validScore * pointsPerQuestion;
+  const earnedPoints = score * pointsPerQuestion;
 
-  // Calculate percentage and ensure it's between 0 and 100
-  const percentage = totalQuestions > 0 ? Math.floor((validScore / totalQuestions) * 100) : 0;
+  // Calculate percentage and cap it at 100
+  const percentage = totalQuestions > 0 ? Math.floor((score / totalQuestions) * 100) : 0;
   const result = percentage >= 50 ? 'Passed' : 'Failed';
 
   return (
@@ -34,7 +34,7 @@ export default function Result({ username, score = 0, totalQuestions = 0 }) {
           </div>
           <div className="tit">
             <div className="name">Correct Answers</div>
-            <div className="val">{validScore}</div>
+            <div className="val">{score}</div>
           </div>
           <div className="tit">
             <div className="name">Total Earned Points</div>
@@ -42,7 +42,7 @@ export default function Result({ username, score = 0, totalQuestions = 0 }) {
           </div>
           <div className="tit">
             <div className="name">Percentage</div>
-            <div className="val">{percentage}%</div>
+            <div className="val">{Math.min(percentage, 100)}%</div> {/* Ensure percentage does not exceed 100% */}
           </div>
           <div className="tit">
             <div className="name">Quiz Result</div>
