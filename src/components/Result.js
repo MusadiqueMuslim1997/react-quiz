@@ -1,15 +1,10 @@
 import React from 'react';
-import './Quiz.css'; // Ensure to create or update Result.css for styling
+import './Quiz.css';
 
-export default function Result({ score = 0, totalQuestions = 0 }) {
-  // Define how many points each question is worth
+export default function Result({ username, score = 0, totalQuestions = 0 }) {
   const pointsPerQuestion = 10;
-
-  // Calculate total possible points and earned points
   const totalPoints = totalQuestions * pointsPerQuestion;
   const earnedPoints = score * pointsPerQuestion;
-
-  // Ensure percentage calculation is safe
   const percentage = totalQuestions > 0 ? (score / totalQuestions) * 100 : 0;
   const result = percentage >= 50 ? 'Passed' : 'Failed';
 
@@ -20,7 +15,7 @@ export default function Result({ score = 0, totalQuestions = 0 }) {
         <div className="info">
           <div className="tit">
             <div className="name">Username</div>
-            <div className="val">Musadique Muslim</div>
+            <div className="val">{username}</div>
           </div>
           <div className="tit">
             <div className="name">Total Quiz Points</div>
@@ -40,11 +35,11 @@ export default function Result({ score = 0, totalQuestions = 0 }) {
           </div>
           <div className="tit">
             <div className="name">Percentage</div>
-            <div className="val">{percentage.toFixed(2)}%</div> {/* Displaying percentage */}
+            <div className="val">{percentage.toFixed(2)}%</div>
           </div>
           <div className="tit">
             <div className="name">Quiz Result</div>
-            <div className={`val ${result === 'Passed' ? 'green' : 'red'}`}>{result}</div> {/* Conditional styling */}
+            <div className={`val ${result === 'Passed' ? 'green' : 'red'}`}>{result}</div>
           </div>
         </div>
       </div>
