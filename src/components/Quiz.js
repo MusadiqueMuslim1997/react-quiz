@@ -6,26 +6,20 @@ export default function Quiz({ onFinish }) {
   const [index, setIndex] = useState(0);
   const [selectedAnswers, setSelectedAnswers] = useState(Array(htmlQuiz.length).fill(null));
   const [answeredQuestions, setAnsweredQuestions] = useState(Array(htmlQuiz.length).fill(false));
-  const [timeLeft, setTimeLeft] = useState(300); // 5 minutes in seconds
+  const [timeLeft, setTimeLeft] = useState(5 *60); // 5 minutes in seconds
   const [score, setScore] = useState(0);
   const [showScore, setShowScore] = useState(false);
 
   const handleFinish = useCallback(() => {
-    // Check if all questions up to the current index are answered
-    for (let i = 0; i < htmlQuiz.length; i++) {
-      if (selectedAnswers[i] === null) {
-        alert('Please answer all previous questions before finishing the quiz.');
-        return; // Prevent navigating to results if validation fails
-      }
-    }
+    // Ensure the result is displayed even if time runs out
     setShowScore(true);
     onFinish(score, htmlQuiz.length); // Pass score and total questions to parent
-  }, [onFinish, score, selectedAnswers]);
+  }, [onFinish, score]);
 
   useEffect(() => {
     if (timeLeft > 0) {
       const timer = setTimeout(() => {
-        setTimeLeft(timeLeft - 1);
+        setTimeLeft(prevTimeLeft => prevTimeLeft - 1);
       }, 1000);
       return () => clearTimeout(timer);
     } else {
@@ -36,7 +30,7 @@ export default function Quiz({ onFinish }) {
   const formatTime = (seconds) => {
     const minutes = Math.floor(seconds / 60);
     const remainingSeconds = seconds % 60;
-    return `${minutes} : ${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
+    return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
   };
 
   const next = () => {
