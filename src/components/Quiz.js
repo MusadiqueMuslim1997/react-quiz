@@ -10,6 +10,16 @@ export default function Quiz({ onFinish }) {
   const [score, setScore] = useState(0);
   const [showScore, setShowScore] = useState(false);
 
+  // Update score based on new selection
+  const updateScore = (prevAnswer, newAnswer, correctAnswer) => {
+    if (prevAnswer === correctAnswer) {
+      setScore(prevScore => prevScore - 1); // Deduct if previously counted as correct
+    }
+    if (newAnswer === correctAnswer) {
+      setScore(prevScore => prevScore + 1); // Add if new answer is correct
+    }
+  };
+
   const handleFinish = useCallback(() => {
     // Ensure the result is displayed even if time runs out
     setShowScore(true);
@@ -39,10 +49,13 @@ export default function Quiz({ onFinish }) {
 
   const next = () => {
     const currentQuestion = htmlQuiz[index];
-    if (selectedAnswers[index] === currentQuestion.ans) {
-      setScore(prevScore => prevScore + 1);
-    }
+    const prevAnswer = selectedAnswers[index];
+    const correctAnswer = currentQuestion.ans;
 
+    // Update score if needed
+    updateScore(prevAnswer, selectedAnswers[index], correctAnswer);
+
+    // Mark the current question as answered
     const newAnsweredQuestions = [...answeredQuestions];
     newAnsweredQuestions[index] = true;
     setAnsweredQuestions(newAnsweredQuestions);
@@ -62,7 +75,12 @@ export default function Quiz({ onFinish }) {
 
   const handleAnswerSelect = (answer) => {
     const newSelectedAnswers = [...selectedAnswers];
+    const prevAnswer = newSelectedAnswers[index];
     newSelectedAnswers[index] = answer;
+
+    // Update score based on previous and new answers
+    updateScore(prevAnswer, answer, htmlQuiz[index].ans);
+
     setSelectedAnswers(newSelectedAnswers);
   };
 
