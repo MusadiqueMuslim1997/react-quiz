@@ -85,12 +85,5 @@ export let htmlQuiz = [
         opt4: 'None of the above',
         ans: 'False'
     },
-    {
-        que: ' The external JavaScript file must contain the <script> tag.',
-        opt1: 'True',
-        opt2: 'False',
-        opt3: 'All of the above',
-        opt4: 'None of the above',
-        ans: 'False'
-    }
+    
 ]

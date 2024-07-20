@@ -6,7 +6,6 @@ export default function Quiz({ onFinish }) {
   const [index, setIndex] = useState(0);
   const [selectedAnswers, setSelectedAnswers] = useState(Array(htmlQuiz.length).fill(null));
   const [answeredQuestions, setAnsweredQuestions] = useState(Array(htmlQuiz.length).fill(false));
-  const [optionsDisabled, setOptionsDisabled] = useState(Array(htmlQuiz.length).fill(false));
   const [timeLeft, setTimeLeft] = useState(5 * 60); // 5 minutes in seconds
   const [score, setScore] = useState(0);
   const [showScore, setShowScore] = useState(false);
@@ -39,35 +38,19 @@ export default function Quiz({ onFinish }) {
   };
 
   const next = () => {
-    if (index === htmlQuiz.length - 1) {
-      if (!allQuestionsAnswered()) {
-        alert('Please answer all questions before finishing the quiz.');
-        return;
-      }
-      if (selectedAnswers[index] === htmlQuiz[index].ans) {
-        setScore(prevScore => prevScore + 1);
-      }
-      handleFinish();
+    const currentQuestion = htmlQuiz[index];
+    if (selectedAnswers[index] === currentQuestion.ans) {
+      setScore(prevScore => prevScore + 1);
+    }
+
+    const newAnsweredQuestions = [...answeredQuestions];
+    newAnsweredQuestions[index] = true;
+    setAnsweredQuestions(newAnsweredQuestions);
+
+    if (index < htmlQuiz.length - 1) {
+      setIndex(prevIndex => prevIndex + 1);
     } else {
-      // Handle next question logic
-      if (selectedAnswers[index] === htmlQuiz[index].ans) {
-        setScore(prevScore => prevScore + 1);
-      }
-
-      // Disable options for the current question only if an option was selected
-      const newOptionsDisabled = [...optionsDisabled];
-      if (selectedAnswers[index] !== null) {
-        newOptionsDisabled[index] = true;
-      }
-      setOptionsDisabled(newOptionsDisabled);
-
-      const newAnsweredQuestions = [...answeredQuestions];
-      newAnsweredQuestions[index] = true;
-      setAnsweredQuestions(newAnsweredQuestions);
-
-      if (index < htmlQuiz.length - 1) {
-        setIndex(prevIndex => prevIndex + 1);
-      }
+      handleFinish(); // Navigate to result if it's the last question
     }
   };
 
@@ -83,10 +66,18 @@ export default function Quiz({ onFinish }) {
     setSelectedAnswers(newSelectedAnswers);
   };
 
+  const handleNextClick = () => {
+    if (index === htmlQuiz.length - 1 && !allQuestionsAnswered()) {
+      alert("Please answer all questions before finishing the quiz.");
+      return;
+    }
+    next();
+  };
+
   const question = htmlQuiz[index];
   const selectedAnswer = selectedAnswers[index];
   const isAnswered = answeredQuestions[index];
-  const isDisabled = optionsDisabled[index]; // Check if options should be disabled
+  const optionsDisabled = isAnswered && selectedAnswer !== null; // Disable options if answered
 
   return (
     <>
@@ -117,7 +108,7 @@ export default function Quiz({ onFinish }) {
                 id="option1"
                 checked={selectedAnswer === question.opt1}
                 onChange={() => handleAnswerSelect(question.opt1)}
-                disabled={isDisabled && selectedAnswer !== question.opt1}
+                disabled={optionsDisabled}
               />
               <label htmlFor="option1" id='val1'>{question.opt1}</label>
             </div>
@@ -129,7 +120,7 @@ export default function Quiz({ onFinish }) {
                 id="option2"
                 checked={selectedAnswer === question.opt2}
                 onChange={() => handleAnswerSelect(question.opt2)}
-                disabled={isDisabled && selectedAnswer !== question.opt2}
+                disabled={optionsDisabled}
               />
               <label htmlFor="option2" id='val2'>{question.opt2}</label>
             </div>
@@ -141,7 +132,7 @@ export default function Quiz({ onFinish }) {
                 id="option3"
                 checked={selectedAnswer === question.opt3}
                 onChange={() => handleAnswerSelect(question.opt3)}
-                disabled={isDisabled && selectedAnswer !== question.opt3}
+                disabled={optionsDisabled}
               />
               <label htmlFor="option3" id='val3'>{question.opt3}</label>
             </div>
@@ -153,13 +144,13 @@ export default function Quiz({ onFinish }) {
                 id="option4"
                 checked={selectedAnswer === question.opt4}
                 onChange={() => handleAnswerSelect(question.opt4)}
-                disabled={isDisabled && selectedAnswer !== question.opt4}
+                disabled={optionsDisabled}
               />
               <label htmlFor="option4" id='val4'>{question.opt4}</label>
             </div>
             <div className="btns">
               <button className='btn1' onClick={prev} disabled={index === 0}>Prev</button>
-              <button className='btn2' onClick={next}>Next</button>
+              <button className='btn2' onClick={handleNextClick} disabled={false}>Next</button>
             </div>
           </div>
         </section>
