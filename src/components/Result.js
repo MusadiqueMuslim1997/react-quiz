@@ -5,7 +5,7 @@ export default function Result({ username, score = 0, totalQuestions = 0 }) {
   const pointsPerQuestion = 10;
   const totalPoints = totalQuestions * pointsPerQuestion;
   const earnedPoints = score * pointsPerQuestion;
-  const percentage = totalQuestions > 0 ? (score / totalQuestions) * 100 : 0;
+  const percentage = totalQuestions > 0 ? Math.floor((score / totalQuestions) * 100) : 0; // Using Math.floor
   const result = percentage >= 50 ? 'Passed' : 'Failed';
 
   return (
@@ -35,11 +35,11 @@ export default function Result({ username, score = 0, totalQuestions = 0 }) {
           </div>
           <div className="tit">
             <div className="name">Percentage</div>
-            <div className="val">{percentage.toFixed(2)}%</div>
+            <div className="val">{percentage}%</div> {/* Displaying percentage with Math.floor */}
           </div>
           <div className="tit">
             <div className="name">Quiz Result</div>
-            <div className={`val ${result === 'Passed' ? 'green' : 'red'}`}>{result}</div>
+            <div className={`val ${result === 'Passed' ? 'green' : 'red'}`}>{result}</div> {/* Conditional styling */}
           </div>
         </div>
       </div>
