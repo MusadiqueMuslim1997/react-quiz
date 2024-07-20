@@ -217,7 +217,7 @@ cursor: pointer;
         align-items: center;
         justify-content: center;
         padding: 40px 80px;
-        display: none;
+        /* display: none; */
     }
     .boxes{
         width: 550px;
