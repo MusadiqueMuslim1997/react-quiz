@@ -7,7 +7,7 @@ export default function Quiz({ onFinish }) {
   const [selectedAnswers, setSelectedAnswers] = useState(Array(htmlQuiz.length).fill(null));
   const [answeredQuestions, setAnsweredQuestions] = useState(Array(htmlQuiz.length).fill(false));
   const [optionsDisabled, setOptionsDisabled] = useState(Array(htmlQuiz.length).fill(false));
-  const [timeLeft, setTimeLeft] = useState(5 ); // 5 minutes in seconds
+  const [timeLeft, setTimeLeft] = useState(5 * 60); // 5 minutes in seconds
   const [score, setScore] = useState(0);
   const [showScore, setShowScore] = useState(false);
 
