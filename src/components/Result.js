@@ -3,6 +3,16 @@ import './Quiz.css';
 
 export default function Result({ username, score = 0, totalQuestions = 0 }) {
   // Ensure score and totalQuestions are valid
+  if (typeof score !== 'number' || typeof totalQuestions !== 'number') {
+    console.error('Invalid data type for score or totalQuestions');
+    return null;
+  }
+
+  if (score < 0 || totalQuestions < 0) {
+    console.error('Score and totalQuestions must be non-negative');
+    return null;
+  }
+
   if (score > totalQuestions) {
     console.warn('Score exceeds total number of questions.');
   }
@@ -34,7 +44,7 @@ export default function Result({ username, score = 0, totalQuestions = 0 }) {
           </div>
           <div className="tit">
             <div className="name">Correct Answers</div>
-            <div className="val">{score}</div>
+            <div className="val">{Math.min(score, totalQuestions)}</div> {/* Cap at totalQuestions */}
           </div>
           <div className="tit">
             <div className="name">Total Earned Points</div>

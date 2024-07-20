@@ -33,20 +33,35 @@ export default function Quiz({ onFinish }) {
     return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
   };
 
+  const allQuestionsAnswered = () => {
+    return selectedAnswers.every(answer => answer !== null);
+  };
+
   const next = () => {
-    const currentQuestion = htmlQuiz[index];
-    if (selectedAnswers[index] === currentQuestion.ans) {
-      setScore(prevScore => prevScore + 1);
-    }
-
-    const newAnsweredQuestions = [...answeredQuestions];
-    newAnsweredQuestions[index] = true;
-    setAnsweredQuestions(newAnsweredQuestions);
-
-    if (index < htmlQuiz.length - 1) {
-      setIndex(prevIndex => prevIndex + 1);
+    if (index === htmlQuiz.length - 1) {
+      // Check if all questions are answered before finishing the quiz
+      if (!allQuestionsAnswered()) {
+        alert('Please answer all questions before finishing the quiz.');
+        return;
+      }
+      // If all questions are answered or it’s the last question
+      if (selectedAnswers[index] === htmlQuiz[index].ans) {
+        setScore(prevScore => prevScore + 1);
+      }
+      handleFinish();
     } else {
-      handleFinish(); // Navigate to result if it's the last question
+      // Handle next question logic for questions other than the last one
+      if (selectedAnswers[index] === htmlQuiz[index].ans) {
+        setScore(prevScore => prevScore + 1);
+      }
+
+      const newAnsweredQuestions = [...answeredQuestions];
+      newAnsweredQuestions[index] = true;
+      setAnsweredQuestions(newAnsweredQuestions);
+
+      if (index < htmlQuiz.length - 1) {
+        setIndex(prevIndex => prevIndex + 1);
+      }
     }
   };
 
