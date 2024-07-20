@@ -2,27 +2,15 @@ import React from 'react';
 import './Quiz.css';
 
 export default function Result({ username, score = 0, totalQuestions = 0 }) {
-  // Ensure score and totalQuestions are valid
-  if (typeof score !== 'number' || typeof totalQuestions !== 'number') {
-    console.error('Invalid data type for score or totalQuestions');
-    return null;
-  }
+  // Ensure score is within valid range
+  const validScore = Math.max(0, Math.min(score, totalQuestions));
 
-  if (score < 0 || totalQuestions < 0) {
-    console.error('Score and totalQuestions must be non-negative');
-    return null;
-  }
-
-  if (score > totalQuestions) {
-    console.warn('Score exceeds total number of questions.');
-  }
-
-  const pointsPerQuestion = 10;
-  const totalPoints = totalQuestions * pointsPerQuestion;
-  const earnedPoints = score * pointsPerQuestion;
+  const pointsPerQuestion = 10; // Points awarded per question
+  const totalPoints = totalQuestions * pointsPerQuestion; // Total points possible
+  const earnedPoints = validScore * pointsPerQuestion; // Total points earned
 
   // Calculate percentage and cap it at 100
-  const percentage = totalQuestions > 0 ? Math.floor((score / totalQuestions) * 100) : 0;
+  const percentage = totalQuestions > 0 ? Math.floor((validScore / totalQuestions) * 100) : 0;
   const result = percentage >= 50 ? 'Passed' : 'Failed';
 
   return (
@@ -44,7 +32,7 @@ export default function Result({ username, score = 0, totalQuestions = 0 }) {
           </div>
           <div className="tit">
             <div className="name">Correct Answers</div>
-            <div className="val">{Math.min(score, totalQuestions)}</div> {/* Cap at totalQuestions */}
+            <div className="val">{validScore}</div>
           </div>
           <div className="tit">
             <div className="name">Total Earned Points</div>
