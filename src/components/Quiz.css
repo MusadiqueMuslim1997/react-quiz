@@ -75,7 +75,7 @@ body {
 }
 
 .inp-user > input::placeholder {
-    color: #e0e0e0;
+    color: #808080;
 }
 
 .inp-user > input:focus {
